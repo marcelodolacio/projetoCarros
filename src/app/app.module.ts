@@ -12,6 +12,9 @@ import {GMapModule} from 'primeng/gmap';
 // import { MapsComponent } from './maps/maps.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete'; 
 import { AgmCoreModule } from '@agm/core';
+import {ImageModule} from 'primeng/image';
+import {ToolbarModule} from 'primeng/toolbar';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { AgmCoreModule } from '@agm/core';
     TableModule,
     GMapModule,
     GooglePlaceModule,
+    ImageModule,
+    ToolbarModule,
+    InputTextModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBSbUSjaFFRK336-uv7CIDd9bDHCTZM-Ek',
       libraries: ['places']

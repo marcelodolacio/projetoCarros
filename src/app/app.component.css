@@ -1,5 +1,16 @@
 
 .full {
-  width: 100vw;
-  height: 100vh;
+  margin: auto;
+  width: 60%;
+  height: 50vh;
+  padding: 10px;
+}
+
+.tablePontos{
+  padding: 5%;
+}
+
+:host ::ng-deep .p-toolbar{
+  background-color: #00974a;
+
 }

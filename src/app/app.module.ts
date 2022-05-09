@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {GMapModule} from 'primeng/gmap';
@@ -35,6 +35,7 @@ import {InputTextModule} from 'primeng/inputtext';
     ImageModule,
     ToolbarModule,
     InputTextModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBSbUSjaFFRK336-uv7CIDd9bDHCTZM-Ek',
       libraries: ['places']

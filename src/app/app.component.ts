@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 declare const google:any
-
+import { HttpClient } from '@angular/common/http';
+import { AppServiceService } from './app-service.service';
+import { Poi } from '../app/interface/poi';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,17 +10,18 @@ declare const google:any
 })
 export class AppComponent implements OnInit, AfterViewInit{
 
-  dados:any [];
+  dados:any ;
   options: any;
   element:any;
   let:any
   long:any
   pontoSelecionado=false;
   dadosCarros:  any []
+  url:any;
 
   @ViewChild('mapElement') mapElement:any
-  constructor(){
-    this.dados =[{nome:'Praça do Relógio', cidade:'Brasilia',lat: -15.7801, lng:-47.9292},{nome:'Pedra fundamental', cidade:'Planaltina',lat: -16.6799, lng:-49.255}, {nome:'Sé', cidade:'São Paulo'}];
+  constructor(private http : HttpClient, private service : AppServiceService){
+   
     this.dadosCarros =[
       {nome:'hb20', marca:'hyundai', cidade:'Brasilia',lat: -15.7801, lng:-47.9292 , tempo:'25 dias'},
       {nome:'Gol', marca:'VW', cidade:'Goiania',lat: -15.7801, lng:-47.9292 , tempo:'12 dias'},
@@ -26,12 +29,26 @@ export class AppComponent implements OnInit, AfterViewInit{
   ];
   }
   ngOnInit() {
-
-    
+      this.getCharacters();  
   }
   ngAfterViewInit(): void {
     
   }
+
+  getCharacters() {
+    this.service.recupaPoi().subscribe(products => {
+      console.log(products);
+      this.dados = products
+    });
+     
+
+    
+  }
+
+  applyFilterGlobal($event: any, stringVal: any, dt: any) {
+    dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
+  }
+
   nha() {
         this.element = new google.maps.Map(this.mapElement.nativeElement, {
         center: {lat: this.let, lng:this.long},
@@ -48,8 +65,8 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
   buscaMapa(elemento:any){
     console.log('euuuu', elemento)
-    this.let=elemento.lat
-    this.long=elemento.lng
+    this.let=elemento.latitude
+    this.long=elemento.longitude
     this.nha();
     
   

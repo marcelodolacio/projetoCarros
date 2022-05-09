@@ -6,60 +6,54 @@
         <p-image src="../assets/Logotipo_da_Localiza_em_2014 (1).png" ></p-image>
         
     </div>
-    
-    <!-- <div class="p-toolbar-group-right">
-        <p-button icon="pi pi-search"></p-button>
-        <p-button icon="pi pi-calendar" styleClass="p-button-success"></p-button>
-        <p-button icon="pi pi-times" styleClass="p-button-danger"></p-button>
-    </div> -->
 </p-toolbar>
 <br>
-
-      <div class="tablePontos">
-            <p-table #dt [value]="dados"  dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-                        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" 
-                        [paginator]="true" 
-                        [filterDelay]="0" [globalFilterFields]="['nome','cidade']">
-                        <ng-template pTemplate="caption">
-                            <div class="table-header">
-                                List of Customers
-                                <!-- <span class="p-input-icon-left"> -->
-                                    <!-- <i class="pi pi-search"></i> -->
-                                    <!-- <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Pesquise aqui!" />
-                                </span> -->
-                            </div>
-                        </ng-template>
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Nome</th>
-                                <th>Cidade</th>
-                                <th>Ação</th>
-                            
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-customer>
-                            <tr>
-                                <td>
-                                    <span class="p-column-title">Name</span>
-                                    {{customer.nome}}
-                                </td>
-                                <td >
-                                <span class="p-column-title">Cidade</span>
-                                {{customer.cidade}}
-                                </td>
-                                <td> 
-                                <button pButton  (click) = "buscaMapa(customer)" type="button" label="Escolher Pátio"></button>
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="emptymessage">
-                            <tr>
-                                <td colspan="8">No customers found.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-        </div>
-
+<div class="tablePontos">
+<p-table #dt [value]="dados"  dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+[rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+[paginator]="true" currentPageReportTemplate="Mostrando {first} de {last} em um total de {totalRecords} registros"
+[filterDelay]="0" [globalFilterFields]="['nome']">
+<ng-template pTemplate="caption">
+    <div class="table-header">
+        Lista de Pontos
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', dt)" placeholder="Procure aqui!" />
+        </span>
+    </div>
+</ng-template>
+<ng-template pTemplate="header">
+    <tr>
+        <th>Nome</th>
+        <th>Raio</th>
+        <th>Ação</th>
+        
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-customer>
+    <tr class="p-selectable-row">
+      
+        <td>
+            <span class="p-column-title">Name</span>
+            {{customer.nome}}
+        </td>
+        <td>
+            <span class="p-column-title">Name</span>
+            {{customer.raio}}
+        </td>
+        <td>
+            <button pButton  (click) = "buscaMapa(customer)" type="button" label="Escolher Pátio"></button>
+        </td>
+        
+    </tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+    <tr>
+        <td colspan="8">No customers found.</td>
+    </tr>
+</ng-template>
+</p-table>
+</div>
 
             <div class="full" #mapElement >
     
@@ -71,11 +65,6 @@
                             [filterDelay]="0" [globalFilterFields]="['nome']">
                             <ng-template pTemplate="caption">
                                 <div class="table-header">
-                                    <!-- List of Customers
-                                    <span class="p-input-icon-left">
-                                        <i class="pi pi-search"></i>
-                                        <input pInputText type="text" (input)="dt.filterGlobal($event.target, 'contains')" placeholder="Global Search" />
-                                    </span> -->
                                 </div>
                             </ng-template>
                             <ng-template pTemplate="header">

@@ -14,3 +14,8 @@
   background-color: #00974a;
 
 }
+agm-map {
+  height: 300px;
+  width:70%;
+  padding-left: 100px;
+ }

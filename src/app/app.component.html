@@ -54,10 +54,24 @@
 </ng-template>
 </p-table>
 </div>
+<div   *ngIf="pontoSelecionado == true" style = "padding-left: 50ch;">
+    <agm-map 
+   [latitude]='lat' 
+   [longitude]='lng'
+   >
+  
+    <agm-marker 
+        [latitude]="lat" 
+        [longitude]="lng">    
+    </agm-marker>
+  
+</agm-map>
 
-            <div class="full" #mapElement >
+</div>
+
+            <!-- <div class="full" #mapElement >
     
-            </div>
+            </div> -->
             <div class="tablePontos" *ngIf="pontoSelecionado == true">
                 <p-table #dt [value]="dadosCarros" [(selection)]="dadosCarros" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
                             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" 

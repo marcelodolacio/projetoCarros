@@ -13,15 +13,15 @@ export class AppComponent implements OnInit, AfterViewInit{
   dados:any ;
   options: any;
   element:any;
-  let:any
-  long:any
+  lat: number = -23.8779431;
+  lng: number = -49.8046873;
   pontoSelecionado=false;
   dadosCarros:  any []
   url:any;
 
   @ViewChild('mapElement') mapElement:any
   constructor(private http : HttpClient, private service : AppServiceService){
-   
+    
     this.dadosCarros =[
       {nome:'hb20', marca:'hyundai', cidade:'Brasilia',lat: -15.7801, lng:-47.9292 , tempo:'25 dias'},
       {nome:'Gol', marca:'VW', cidade:'Goiania',lat: -15.7801, lng:-47.9292 , tempo:'12 dias'},
@@ -49,25 +49,13 @@ export class AppComponent implements OnInit, AfterViewInit{
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-  nha() {
-        this.element = new google.maps.Map(this.mapElement.nativeElement, {
-        center: {lat: this.let, lng:this.long},
-        zoom: 14
-       
-      })
-      new google.maps.Marker({
-        position:{lat: -15.7801, lng:-47.9292},
-        title: "Hello World!",
-      });
-      console.log(this.element,"elemento")
-       this.pontoSelecionado = true;
-    
-  }
+
   buscaMapa(elemento:any){
+    this.pontoSelecionado = false;
     console.log('euuuu', elemento)
-    this.let=elemento.latitude
-    this.long=elemento.longitude
-    this.nha();
+    this.lat=elemento.latitude
+    this.lng=elemento.longitude
+    this.pontoSelecionado = true;
     
   
   }

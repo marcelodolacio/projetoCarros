@@ -38,7 +38,7 @@ import {InputTextModule} from 'primeng/inputtext';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBSbUSjaFFRK336-uv7CIDd9bDHCTZM-Ek',
-      libraries: ['places']
+      libraries: ['places','geometry']
     }),
   ],
   providers: [],

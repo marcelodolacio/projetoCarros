@@ -73,7 +73,7 @@
     
             </div> -->
             <div class="tablePontos" *ngIf="pontoSelecionado == true">
-                <p-table #dt [value]="dadosCarros" [(selection)]="dadosCarros" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+                <p-table #dt [value]="listaCarrosFiltrada" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
                             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" 
                             [paginator]="true" 
                             [filterDelay]="0" [globalFilterFields]="['nome']">
@@ -86,7 +86,7 @@
                                     <th>Nome</th>
                                     <th>Marca</th>
                                     <th>Cidade</th>
-                                    <th>Tempo de patio</th>
+                                   
                                 
                                 </tr>
                             </ng-template>
@@ -94,20 +94,17 @@
                                 <tr>
                                     <td>
                                         <span class="p-column-title">Name</span>
-                                        {{customer.nome}}
+                                        {{customer.placa}}
                                     </td>
                                     <td>
                                         <span class="p-column-title">Marca</span>
-                                        {{customer.marca}}
+                                        {{customer.ignicao}}
                                     </td>
                                     <td>
                                         <span class="p-column-title">Cidade</span>
-                                        {{customer.cidade}}
+                                        {{customer.velocidade}}
                                     </td>
-                                    <td >
-                                        <span class="p-column-title">Tempo de pátio</span>
-                                        {{customer.tempo}}
-                                    </td>
+                                  
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="emptymessage">

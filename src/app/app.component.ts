@@ -19,7 +19,8 @@ export class AppComponent implements OnInit, AfterViewInit{
   dadosCarros:  any;
   url:any;
   listaCarrosFiltrada:any[] = [];
-
+  arrayAgupado: any;
+  nome:any
   @ViewChild('mapElement') mapElement:any
   constructor(private http : HttpClient, private service : AppServiceService){
   
@@ -62,23 +63,46 @@ export class AppComponent implements OnInit, AfterViewInit{
       this.dadosCarros = posicao;
       this.dadosCarros.forEach((item:any,index:any) =>{ 
           if(elemento.raio >= this.calcCrow(elemento.latitude, elemento.longitude,item.latitude,item.longitude)){
-            // console.log('menor',this.calcCrow(elemento.latitude, elemento.longitude,item.latitude,item.longitude));
-            this.listaCarrosFiltrada.push(item);
-            // console.log(this.listaCarrosFiltrada);
+            this.listaCarrosFiltrada.push(item); 
           }
       })
-      this.pontoSelecionado = true;
-      console.log(this.listaCarrosFiltrada.length);
-      console.log(this.listaCarrosFiltrada);
-    });
+
+    this.arrayAgupado = this.listaCarrosFiltrada.reduce((group, product) => {
+      const { placa } = product;
+      group[placa] = group[placa] ?? [];
+      group[placa].push(product);
+      return group;
+    }, {});
 
     
-  }
-  calculateDistance(poi:any,carro:any){
- this.calcCrow(1,1,1,1);
+      this.teste();
+      this.pontoSelecionado = true;
+  });
+
+  
   }
 
+  teste(){
+ 
+    this.listaCarrosFiltrada = [];
+    
+    for(let i = 0; i<Object.keys(this.arrayAgupado).length;i++){
+      console.log(i,'iiii');
+      let nome = Object.getOwnPropertyNames(this.arrayAgupado)[i];
+      console.log('nomeee',nome)
+      let number:any =this.arrayAgupado[nome].length
+      let hora1:any = new Date(this.arrayAgupado[nome][i].data_posicao)
+      let hora2:any = new Date(this.arrayAgupado[nome][number-1].data_posicao)
+       console.log(hora1);
+       console.log(hora2)
+       console.log(Math.abs(hora2 - hora1 )/ 3600000)
+       this.listaCarrosFiltrada.push({placa: nome, hora:Math.abs(hora2 - hora1 )/ 3600000})
 
+    }
+
+  }
+
+ 
    calcCrow(lat1:any, lon1:any, lat2:any, lon2:any) 
   {
     var R = 6371; // km

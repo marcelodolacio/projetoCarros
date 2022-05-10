@@ -19,3 +19,13 @@ agm-map {
   width:70%;
   padding-left: 100px;
  }
+ .p-button{
+  background-color: #00974a;
+  border-color:#00974a;
+ }
+
+
+ :host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight{
+  color: #00974a;
+
+}

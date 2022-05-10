@@ -96,12 +96,19 @@ export class AppComponent implements OnInit, AfterViewInit{
        console.log(hora1);
        console.log(hora2)
        console.log(Math.abs(hora2 - hora1 )/ 3600000)
-       this.listaCarrosFiltrada.push({placa: nome, hora:Math.abs(hora2 - hora1 )/ 3600000})
+       this.listaCarrosFiltrada.push({placa: nome, hora:this.timeConvert(Math.abs(hora2 - hora1 )/ 3600000)})
 
     }
 
   }
-
+   timeConvert(n:number) {
+    var num = n;
+    var hours = (num );
+    var rhours = Math.floor(hours);
+    var minutes = (hours - rhours) * 60;
+    var rminutes = Math.round(minutes);
+    return  rhours + " hora(s) e " + rminutes + " minuto(s).";
+    }
  
    calcCrow(lat1:any, lon1:any, lat2:any, lon2:any) 
   {

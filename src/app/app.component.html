@@ -42,7 +42,7 @@
             {{customer.raio}}
         </td>
         <td>
-            <button pButton  (click) = "buscaMapa(customer)" type="button" label="Escolher Pátio"></button>
+            <button pButton  (click) = "buscaMapa(customer)" type="button" label="Escolher POI"></button>
         </td>
         
     </tr>
@@ -69,23 +69,25 @@
 
 </div>
 
-            <!-- <div class="full" #mapElement >
-    
-            </div> -->
             <div class="tablePontos" *ngIf="pontoSelecionado == true">
                 <p-table #dt [value]="listaCarrosFiltrada" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
                             [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" 
-                            [paginator]="true" 
-                            [filterDelay]="0" [globalFilterFields]="['nome']">
+                            [paginator]="true" currentPageReportTemplate="Mostrando {first} de {last} em um total de {totalRecords} registros"
+                            [filterDelay]="0" [globalFilterFields]="['placa']">
                             <ng-template pTemplate="caption">
                                 <div class="table-header">
+                                    Lista de Carros
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains', dt)" placeholder="Procure aqui!" />
+                                    </span>
                                 </div>
                             </ng-template>
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Marca</th>
-                                    <th>Cidade</th>
+                                    <th>Tempo na POI</th>
+                               
                                    
                                 
                                 </tr>
@@ -98,12 +100,9 @@
                                     </td>
                                     <td>
                                         <span class="p-column-title">Marca</span>
-                                        {{customer.hora}}
+                                        {{customer.hora}} horas
                                     </td>
-                                    <td>
-                                        <span class="p-column-title">Cidade</span>
-                                        {{customer.velocidade}}
-                                    </td>
+                                   
                                   
                                 </tr>
                             </ng-template>

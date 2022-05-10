@@ -8,7 +8,7 @@ import { Poi } from '../app/interface/poi';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit{
 
   dados:any ;
   options: any;
@@ -26,36 +26,31 @@ export class AppComponent implements OnInit, AfterViewInit{
   
   }
   ngOnInit() {
-      this.getCharacters();  
-  }
-  ngAfterViewInit(): void {
-    
+      this.recuperaPoi();  
   }
 
-  getCharacters() {
+  //RECUPERA LISTA DE POI'S
+  recuperaPoi() {
     this.service.recupaPoi().subscribe(products => {
-      console.log(products);
       this.dados = products
     });
-     
-
-    
+      
   }
 
+  //RESPONSAVEL POR FAZER O FILTRO DAS LISTAS
   applyFilterGlobal($event: any, stringVal: any, dt: any) {
     dt!.filterGlobal(($event.target as HTMLInputElement).value, 'contains');
   }
 
-
+  //RESPONSAVEL POR INICIALIZAR AS VARIAVEIS DE LONGITUDE E LATIDUDE DO MAPA
   buscaMapa(elemento:any){
     this.pontoSelecionado = false;
-    console.log('euuuu', elemento)
     this.lat=elemento.latitude
     this.lng=elemento.longitude
-   
     this.buscaPosicoesCarros(elemento);
   }
 
+  //RESPONSAVEL POR RECUPERAR LISTA DE CARRO E TAMBEM CONTEM FILTROS 
   buscaPosicoesCarros(elemento:any) {
     this.listaCarrosFiltrada = [];
     this.service.recupaPosicaoCarro().subscribe(posicao => {
@@ -75,14 +70,15 @@ export class AppComponent implements OnInit, AfterViewInit{
     }, {});
 
     
-      this.teste();
+      this.listaCarrosFiltrados();
       this.pontoSelecionado = true;
   });
 
   
   }
 
-  teste(){
+  //RESPONSAVEL POR FAZER O FILTRO E ENTREGAR QUAL CARRO ESTEVE E COM QUAL TEMPO
+  listaCarrosFiltrados(){
  
     this.listaCarrosFiltrada = [];
     
@@ -96,12 +92,14 @@ export class AppComponent implements OnInit, AfterViewInit{
        console.log(hora1);
        console.log(hora2)
        console.log(Math.abs(hora2 - hora1 )/ 3600000)
-       this.listaCarrosFiltrada.push({placa: nome, hora:this.timeConvert(Math.abs(hora2 - hora1 )/ 3600000)})
+       this.listaCarrosFiltrada.push({placa: nome, hora:this.conversorHoras(Math.abs(hora2 - hora1 )/ 3600000)})
 
     }
 
   }
-   timeConvert(n:number) {
+
+   //RESPONSAVEL POR FAZER A CONVERSAO DE TEMPO PARA MOSTRAR O TEMPO DE FORMA MAIS AMIGAVEL AO USUARIO FINAL
+   conversorHoras(n:number) {
     var num = n;
     var hours = (num );
     var rhours = Math.floor(hours);
@@ -110,6 +108,7 @@ export class AppComponent implements OnInit, AfterViewInit{
     return  rhours + " hora(s) e " + rminutes + " minuto(s).";
     }
  
+    //RESPONSAVEL POR CALCULAR  A DISTANCIA ENTRE DOIS PONTOS E DEVOLVER EM METROS 
    calcCrow(lat1:any, lon1:any, lat2:any, lon2:any) 
   {
     var R = 6371; // km
@@ -125,7 +124,7 @@ export class AppComponent implements OnInit, AfterViewInit{
     return d *1000;
   }
 
-  // Converts numeric degrees to radians
+  //RESPONSAVEL POR CONVERTER PRA RADIANOS
   toRad(Value:any) 
   {
       return Value * Math.PI / 180;

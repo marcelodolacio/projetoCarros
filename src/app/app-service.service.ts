@@ -12,13 +12,17 @@ export class AppServiceService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
     })
   }
+
+  //RESPONSAVEL PELA REQUISICAO HTTP PARA RECUPERAR POI'S
   recupaPoi() {
-    return this.http.get<Poi>('http://localhost:3000/poi');    
+    return this.http.get<Poi>('http://localhost:3000/poi');
   }
+
+  //RESPONSAVEL PELA REQUISICAO HTTP PARA RECUPERAR CARROS
   recupaPosicaoCarro() {
-    return this.http.get<Posicao>('http://localhost:3000/teste');    
+    return this.http.get<Posicao>('http://localhost:3000/carros');
   }
 }
